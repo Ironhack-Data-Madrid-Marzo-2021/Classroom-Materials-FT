@@ -159,7 +159,6 @@ NOTE: *, %, _ are called "Wildcard Characters"
 
 -- EXERCISE: Retrieve all columns for female employes hired (strictly) after '2015-01-01'
 
-### Concat
 
 
 ###########
@@ -183,7 +182,6 @@ All aggregate functions IGNORE NULL values unless specified
 
 
 # How many different names do we have in the table??
-
 
 -- How many employes were born after 1965-01-01??
 SELECT COUNT(*) # NOTE using * makes COUNT to include NULL values
@@ -241,7 +239,7 @@ GROUP BY first_name;
 
 # Rename the COUNT(first_name) column
 
-
+###### CONCAT
 
 ###########
 -- HAVING: https://www.mysqltutorial.org/mysql-having.aspx
