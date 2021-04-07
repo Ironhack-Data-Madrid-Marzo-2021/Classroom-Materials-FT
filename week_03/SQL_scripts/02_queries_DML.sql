@@ -398,7 +398,9 @@ SELECT
 FROM
     employees
 GROUP BY first_name
-# HAVING|WHERE names_count > 250
+
+HAVING names_count > 250
+
 ORDER BY first_name;
 
 
@@ -416,10 +418,35 @@ From the subset of employees hired before 2015, (it applies to all rows --> WHER
 Extract a list of all names that are encountered less than 250 times. (aggregate funct COUNT --> HAVING)
 */
 
-
+SELECT 
+    first_name, COUNT(first_name) AS names_count
+FROM
+    employees
+WHERE
+    hire_date < '2015-01-01'
+GROUP BY first_name
+HAVING COUNT(first_name) < 250
+ORDER BY first_name;
 
 ###########
 -- LIMIT: https://www.mysqltutorial.org/mysql-limit.aspxauthors
-
-
 # Show the employee numbers of the 10 highest paid employees 
+SELECT 
+    emp_no, salary
+FROM
+    salaries
+ORDER BY salary DESC
+LIMIT 10;
+
+
+########### EXTRA ###################
+-- SQL has built-in functions to deal with NULL values. Good examples are:
+
+# IFNULL(expression_1,expression_2); returns expression_1 if expression_1 is not NULL ; otherwise, it returns expression_2
+
+# COALESCE(value1,value2,...);takes a number of arguments and returns the first non-NULL argument. 
+# In case all arguments are NULL, the COALESCE function returns NULL.
+
+# for more info: 
+-- > COALESECE() https://www.mysqltutorial.org/mysql-coalesce/
+-- > IFNULL() https://www.mysqltutorial.org/mysql-ifnull/
