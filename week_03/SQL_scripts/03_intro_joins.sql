@@ -1,4 +1,5 @@
-/* From looking at our RD, we know that publishers and titles have a one-to-many relationship. Let's join them and get a count of the number of titles each publisher has published. */
+/* From looking at our RD, we know that publishers and titles have a one-to-many relationship. 
+Let's join them and get a count of the number of titles each publisher has published. */
 
 SELECT pub_name, title
 FROM publishers 
@@ -12,7 +13,10 @@ ON publishers.pub_id = titles.pub_id
 GROUP BY pub_name;
 
 
-/* Because we used an INNER JOIN for this query, it returns only results for publishers whose pub_id is in both tables. What if we wanted the results to return records for all the publishers, regardless of whether they had published any titles? This is exactly what a left join can help us with. All we need to do is replace our INNER JOIN with a LEFT JOIN and it will return all the records in the publishers table and count zero records for the ones that do not have any titles published.*/
+/* Because we used an INNER JOIN for this query, it returns only results for publishers whose pub_id is in both tables. 
+What if we wanted the results to return records for all the publishers, regardless of whether they had published any titles? 
+This is exactly what a left join can help us with. 
+All we need to do is replace our INNER JOIN with a LEFT JOIN and it will return all the records in the publishers table and count zero records for the ones that do not have any titles published.*/
 
 SELECT pub_name, COUNT(title_id) AS count_titles
 FROM publishers 
