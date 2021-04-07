@@ -14,17 +14,22 @@
 -- SELECT - FROM: https://www.mysqltutorial.org/mysql-select-statement-query-data.aspx
 
 
-USE employees;
+#USE employees;
 
 ###########
 -- SELECT - FROM: https://www.mysqltutorial.org/mysql-select-statement-query-data.aspx
 
-# select specific columns from table
 
+# select specific columns from table
+SELECT 
+    first_name, last_name, birth_date
+FROM
+    employees;
 
 # select all columns from table   
 
-
+SELECT * 
+FROM employees;
 
 
 ###########
@@ -36,10 +41,14 @@ need to satisfy
 */
 
 -- All employees named Hugo
-
+SELECT *
+FROM employees
+WHERE first_name = "Hugo";
     
 -- All female employees
-
+SELECT * 
+FROM employees
+WHERE gender = "F";
 
 ###########    
 /*
@@ -51,20 +60,26 @@ frequent ones!
 -- AND: https://www.mysqltutorial.org/mysql-and/
 
 -- All female employees named Hugo
-
+SELECT *
+FROM employees
+WHERE first_name = 'Hugo' AND gender = 'F';
 
 ###########
 -- OR: https://www.mysqltutorial.org/mysql-or/
 
 -- All employees that are either female or named Hugo
 
-    
+SELECT *
+FROM employees
+WHERE first_name = "Hugo" OR gender = "F"
     
 ###########
 -- Operator Precedence
 
 # What is this query going to return??
-
+SELECT *
+FROM employees
+WHERE first_name = 'Hugo' AND (gender = 'M' OR gender = 'F');
 
 /*
 SQL rule: The operator AND takes precedence over the operator OR
@@ -77,15 +92,23 @@ SQL rule: The operator AND takes precedence over the operator OR
 -- IN / NOT IN: https://www.mysqltutorial.org/sql-in.aspx
 
 # Retrieve all data for people named either: Hugo, Mark, Bojan, or Anneke
-
+SELECT * 
+FROM employees
+WHERE 
+	first_name = "Hugo"
+    OR first_name = "Bojan"
+    OR first_name = "Anneke";
 
 # A better option ("Python like")
-SELECT *
+
+SELECT * 
 FROM employees
-WHERE first_name IN ('Hugo', 'Mark', 'Bojan','Anneke');
+WHERE first_name IN ("Hugo", "Bojan", "Anneke");
 
 # Or, to do just the opposite
-
+SELECT * 
+FROM employees
+WHERE first_name NOT IN ("Hugo", "Bojan", "Anneke");
 
 ###########
 -- LIKE / NOT LIKE: https://www.mysqltutorial.org/mysql-like/
@@ -100,23 +123,43 @@ Syntax: expression LIKE pattern ESCAPE escape_character
 
 # Select all employees whose name starts with 'An'
 
+SELECT *
+FROM employees
+WHERE first_name LIKE ("An%");
+
     
 # What will this do?
 
+SELECT *
+FROM employees
+WHERE first_name LIKE ("%An");
 
 # And this?    
-
+SELECT *
+FROM employees
+WHERE first_name LIKE ("%AN");
 
 
 -- The underscore ( _ ) wildcard matches any single character--- but only one
 
-
+SELECT *
+FROM employees
+WHERE first_name LIKE ('mar_');
 
 # (NOT LIKE works just in the opposite way)
 
+
+
+SELECT *
+FROM employees
+WHERE first_name NOT LIKE ('mar_');
+
+
 # Retrieve all data from employees not hired in the year 1990
 
-
+SELECT *
+FROM employees
+WHERE hire_date NOT LIKE ("1990%");
     
 /*
 NOTE: *, %, _ are called "Wildcard Characters" 
@@ -128,24 +171,47 @@ NOTE: *, %, _ are called "Wildcard Characters"
 
 # with dates
 
+SELECT *
+FROM employees
+WHERE hire_date >= "1990-01-01" AND hire_date <= "2000-01-01";
 
-# It is equivalent to	
 
-    
+
+SELECT *
+FROM employees
+WHERE hire_date >= "1990-01-01" AND hire_date <= "2000-01-01";
+
+
+# It is equivalent to
+	
+SELECT *
+FROM employees
+WHERE  
+	hire_date BETWEEN "1990-01-01" AND  "2000-01-01";
+
 # with numeric types    
-
+SELECT *
+FROM salaries
+WHERE 
+	salary NOT BETWEEN 60000 AND 70000;
 
 # with strings
-
+SELECT *
+FROM employees
+WHERE first_name  BETWEEN "A%" AND "D%";
 
     
 ###########
 -- IS NOT NULL / IS NULL: https://www.mysqltutorial.org/mysql-is-null/
 -- Just like pandas ʕ•ᴥ•ʔ
+
+SELECT *
+FROM employees
+WHERE first_name IS NULL;
     
-    
-    
-    
+SELECT *
+FROM employees
+WHERE first_name IS NOT NULL;
 
 ###########
 -- Mathematical Comparison Operators
@@ -154,8 +220,8 @@ NOTE: *, %, _ are called "Wildcard Characters"
 	# not equal <> or !=   (como en python)
 	# greater than >
 	# greater or equal than >=
-	# less than <=
-	# less than or equal  
+	# less than <
+	# less than or equal  <=
 
 -- EXERCISE: Retrieve all columns for female employes hired (strictly) after '2015-01-01'
 
@@ -266,19 +332,13 @@ while WHERE cannot use aggregate functions within its conditions
 */
 
 # WHERE and HAVING equivalent:
-SELECT 
-    *
-FROM
-    employees
-WHERE
-    hire_date >= '2000-01-01';
+SELECT * 
+FROM employees
+WHERE hire_date >= '2000-01-01';
     
-SELECT 
-    *
-FROM
-    employees
-HAVING
-    hire_date >= '2000-01-01';
+SELECT *
+FROM employees
+HAVING hire_date >= '2000-01-01';
 
 # Example WHERE doesn´t work, HAVING does:
 
@@ -312,7 +372,7 @@ Extract a list of all names that are encountered less than 250 times. (aggregate
 
 
 ###########
--- LIMIT: https://www.mysqltutorial.org/mysql-limit.aspx
+-- LIMIT: https://www.mysqltutorial.org/mysql-limit.aspxauthors
 
 
 # Show the employee numbers of the 10 highest paid employees 
