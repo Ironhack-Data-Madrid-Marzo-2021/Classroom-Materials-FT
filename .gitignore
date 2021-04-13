@@ -4,7 +4,3 @@
 .vscode
 test.ipynb
 .env
-
-week_04/02-GeoViz_folium.ipynb
-week_04/03-GeoViz_coropletico.ipynb
-week_04/04-geo_dataframe.ipynb
