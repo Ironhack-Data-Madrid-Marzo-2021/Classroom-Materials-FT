@@ -4,3 +4,6 @@
 .vscode
 test.ipynb
 .env
+07-geoqueries.ipynb
+losdatos.json
+losveganos.json
