@@ -1,5 +1,5 @@
 
-# Creando una API básica explain Flask en el Bootcamp de Data en Ironahck.
+# Creando una API básica para explicar Flask en el Bootcamp de Data en Ironahck.
 La api tendrá un método POST para introducir datos y un método GET para extraer datos
 
 # ¿Cómo Funciona?
