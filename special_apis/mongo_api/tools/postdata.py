@@ -6,5 +6,5 @@ def insertamensaje(escena,personaje,frase):
     "character_name": personaje,
     "dialogue": frase 
     }
-    variable = collection.insert_one(dict_insert)
-    print(variable)
+    collection.insert_one(dict_insert)
+    
