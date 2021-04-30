@@ -7,8 +7,6 @@ import tools.getdata as get
 import tools.postdata as pos
 
 
-
-
 app = Flask(__name__)
 
 
@@ -25,6 +23,7 @@ def index():
 @app.route("/frases/<name>")
 def frasespersonaje(name):
     frases = get.mensajespersonaje(name)
+
     return jsonify(frases)
 
 
@@ -35,8 +34,6 @@ def insertamensaje():
     frase = request.form.get("dialogue")
     pos.insertamensaje(escena, personaje, frase)
     return "Se ha introducido el mensaje en la base de datos"
-
-
 
 
 
