@@ -8,7 +8,7 @@ from streamlit_folium import folium_static
 import codecs
 import streamlit.components.v1 as components
 
-st.set_page_config(layout="wide")
+
 
 imagen = Image.open("images/portada2.jpg")
 st.image(imagen)
